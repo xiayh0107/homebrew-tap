@@ -22,6 +22,13 @@ class SshServerManager < Formula
   sha256 "8cf9a9a9d4c03571202966f165755cc6119f2c1cac17a5025072da605a9889eb"
   license "MIT"
 
+  bottle do
+    root_url "https://github.com/xiayh0107/homebrew-tap/releases/download/ssh-server-manager-0.10.1"
+    sha256 cellar: :any, arm64_tahoe:   "d2c336d7b35b8582e7aeff23117d9d38602fff7e8f0bdf7b221312413254ed28"
+    sha256 cellar: :any, arm64_sequoia: "af4bba2599f0855a6f01f25dcdbb689fe3dbc8e07072d90bfa5021ce73b14b58"
+    sha256 cellar: :any, x86_64_linux:  "d9be71f51f739af8caec5355317ecd43607c6f849cc48b903d2464d1b5ae6c93"
+  end
+
   depends_on "pkgconf" => :build
   depends_on "rust" => :build
   depends_on "libyaml"
