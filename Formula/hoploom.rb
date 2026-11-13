@@ -18,7 +18,7 @@ class Hoploom < Formula
 
   desc "Manage SSH hosts and credentials for humans and AI agents"
   homepage "https://github.com/xiayh0107/hoploom"
-  url "https://files.pythonhosted.org/packages/source/h/hoploom/hoploom-0.12.1.tar.gz"
+  url "https://files.pythonhosted.org/packages/6a/2d/e2d43577eceacb26ccaa4b8fc5c19d6b2c905a6677f1b4cc906bcee26ac7/hoploom-0.12.1.tar.gz"
   sha256 "cdd4d83ea54166836c5116723cd5fc1b1fa62b92b0176737915ba19da1628d3a"
   license "MIT"
 
