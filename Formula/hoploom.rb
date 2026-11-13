@@ -22,6 +22,13 @@ class Hoploom < Formula
   sha256 "cdd4d83ea54166836c5116723cd5fc1b1fa62b92b0176737915ba19da1628d3a"
   license "MIT"
 
+  bottle do
+    root_url "https://github.com/xiayh0107/homebrew-tap/releases/download/hoploom-0.12.1"
+    sha256 cellar: :any, arm64_tahoe:   "5f8ce9156b0554f742af0604f9b75f6200cbffbb288cb9d634e6688328dd49b5"
+    sha256 cellar: :any, arm64_sequoia: "d817cd41d36bdaa97eabdeb3f8b09df1876483fd258da9676b1ae50e49f83203"
+    sha256 cellar: :any, x86_64_linux:  "e1527a1bde3e490cd7640c32933200cc0d3ee8372291867adf00e2888bbe1210"
+  end
+
   depends_on "pkgconf" => :build
   depends_on "rust" => :build
   depends_on "libyaml"
