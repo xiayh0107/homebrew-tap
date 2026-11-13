@@ -1,11 +1,11 @@
-# Homebrew formula for ssh-server-manager, published in the xiayh0107/tap tap
+# Homebrew formula for hoploom, published in the xiayh0107/tap tap
 # (https://github.com/xiayh0107/homebrew-tap).
 #
 # Rendered by `scripts/prepare_packaging` from the sdist PyPI serves; do not
 # edit the version or sha256 by hand. Then, in the tap checkout:
 #
-#   cp ssh-server-manager.rb "$(brew --repository xiayh0107/tap)/Formula/"
-#   brew update-python-resources xiayh0107/tap/ssh-server-manager
+#   cp hoploom.rb "$(brew --repository xiayh0107/tap)/Formula/"
+#   brew update-python-resources xiayh0107/tap/hoploom
 #
 # and open a pull request there, so `brew test-bot` builds it on macOS and Linux.
 # `brew update-python-resources` fills the resource blocks: they pin every
@@ -13,21 +13,14 @@
 # generated in the tap rather than committed from here. Homebrew installs every
 # resource from source, which is why Rust (pydantic-core, cryptography, bcrypt),
 # OpenSSL, libffi and libyaml are build or runtime dependencies here.
-class SshServerManager < Formula
+class Hoploom < Formula
   include Language::Python::Virtualenv
 
   desc "Manage SSH hosts and credentials for humans and AI agents"
-  homepage "https://github.com/xiayh0107/servers-connect"
-  url "https://files.pythonhosted.org/packages/20/d5/c5d4d32ef1a7f1a71297c79477f72d8646c3c9aa26e039241e75b39db823/ssh_server_manager-0.10.1.tar.gz"
-  sha256 "8cf9a9a9d4c03571202966f165755cc6119f2c1cac17a5025072da605a9889eb"
+  homepage "https://github.com/xiayh0107/hoploom"
+  url "https://files.pythonhosted.org/packages/6a/2d/e2d43577eceacb26ccaa4b8fc5c19d6b2c905a6677f1b4cc906bcee26ac7/hoploom-0.12.1.tar.gz"
+  sha256 "cdd4d83ea54166836c5116723cd5fc1b1fa62b92b0176737915ba19da1628d3a"
   license "MIT"
-
-  bottle do
-    root_url "https://github.com/xiayh0107/homebrew-tap/releases/download/ssh-server-manager-0.10.1"
-    sha256 cellar: :any, arm64_tahoe:   "d2c336d7b35b8582e7aeff23117d9d38602fff7e8f0bdf7b221312413254ed28"
-    sha256 cellar: :any, arm64_sequoia: "af4bba2599f0855a6f01f25dcdbb689fe3dbc8e07072d90bfa5021ce73b14b58"
-    sha256 cellar: :any, x86_64_linux:  "d9be71f51f739af8caec5355317ecd43607c6f849cc48b903d2464d1b5ae6c93"
-  end
 
   depends_on "pkgconf" => :build
   depends_on "rust" => :build
@@ -38,7 +31,7 @@ class SshServerManager < Formula
   uses_from_macos "libffi"
 
   on_linux do
-    # keyring reaches the Secret Service through these on Linux only.
+    # Keyring uses Secret Service through these dependencies on Linux.
     resource "jeepney" do
       url "https://files.pythonhosted.org/packages/7b/6f/357efd7602486741aa73ffc0617fb310a29b588ed0fd69c2399acbb85b0c/jeepney-0.9.0.tar.gz"
       sha256 "cf0e9e845622b81e4a28df94c40345400256ec608d0e55bb8a3feaa9163f5732"
@@ -50,9 +43,11 @@ class SshServerManager < Formula
     end
   end
 
+  pypi_packages extra_packages: ["maturin==1.16.0", "jeepney", "secretstorage"]
+
   resource "annotated-doc" do
-    url "https://files.pythonhosted.org/packages/5a/8e/38aa427ed5402449e226975b649c5dc73ccadfefeb95e6aecb8f8ea4b6b6/annotated_doc-0.0.5.tar.gz"
-    sha256 "c7e58ce09192557605d8bbd92836d7e1d520ac9580096042c0bfd197efacf1bb"
+    url "https://files.pythonhosted.org/packages/0f/6e/a61e86e43bb6039b31a33a8f5fba76fe1cdacf3661e7b9756d4ff1b28cdc/annotated_doc-0.0.6.tar.gz"
+    sha256 "7969bb69912085b2285849c0dcac0b4b374fd180c13cf10a87f284ffcf347bbf"
   end
 
   resource "annotated-types" do
@@ -61,8 +56,8 @@ class SshServerManager < Formula
   end
 
   resource "anyio" do
-    url "https://files.pythonhosted.org/packages/a9/d2/f4d173e22df740bc37b1db102b386ba719b66e95b0f0d751f556b387e6d2/anyio-4.15.1.tar.gz"
-    sha256 "9f28306018cbd6d329e64a36d58256edff76dd996fe423bc957326e578b82a94"
+    url "https://files.pythonhosted.org/packages/a1/98/7e457a3b014976887a050561955c0b76e1e7e2d6e27b78ecef2ef80518f2/anyio-4.16.0.tar.gz"
+    sha256 "59bb03251907983d1603d27c3087ddb1e93299ea2163adcdba37899a4fb12ffb"
   end
 
   resource "argon2-cffi" do
@@ -81,8 +76,8 @@ class SshServerManager < Formula
   end
 
   resource "cbor2" do
-    url "https://files.pythonhosted.org/packages/39/34/d443914ea562a985ccb357682e17b7190d5d58eff797c741379be47a8f31/cbor2-6.1.5.tar.gz"
-    sha256 "6eb06160c42315ac0c4ded461c7d84d92fa18c69d13d17fc1dfc1fae96580c95"
+    url "https://files.pythonhosted.org/packages/1b/2f/bf52daccd1027ffdfad3f04ae1730383e5b406abb8a9a98963584dd39563/cbor2-6.2.1.tar.gz"
+    sha256 "086c1588bd407a46739da704b5ee7d15225dc998d9582a0519fc6c9a114b25f7"
   end
 
   resource "cffi" do
@@ -91,8 +86,8 @@ class SshServerManager < Formula
   end
 
   resource "click" do
-    url "https://files.pythonhosted.org/packages/c7/0e/7fa0ef50764b67090eca4114772a2abf8b6148198475e54c660b97caeee6/click-8.5.0.tar.gz"
-    sha256 "ba0d2089de75ea0310e2dde03160e6ca10009947fb95a182f9b54021bb272e34"
+    url "https://files.pythonhosted.org/packages/45/37/edbf1b0707709013c0cf2e8317e03d97ed29bf4cac709fe328904ae92a38/click-8.5.1.tar.gz"
+    sha256 "9bbfada76703fd1d784b83eea012e3e8c6a001a876543ef104fa56aaaeb072b4"
   end
 
   resource "cryptography" do
@@ -101,8 +96,8 @@ class SshServerManager < Formula
   end
 
   resource "fastapi" do
-    url "https://files.pythonhosted.org/packages/ed/3d/2cc1a0dbc2dac6e157b4ef12bac063e1016cb7c6d7395f76665e439cf1aa/fastapi-0.161.1.tar.gz"
-    sha256 "4076b88434452e20289379068e976c4a04c65ffc8e6be31510106e150a422f0f"
+    url "https://files.pythonhosted.org/packages/4e/7b/ae546e10f153fcf9a6afd8b9fe4730bdfeb8fdcb93178d54122973ef3f4c/fastapi-0.162.5.tar.gz"
+    sha256 "1ca37f64f61c99cebd38636e67525fb721c5e8c1169f07f2a35d73b0a63265d4"
   end
 
   resource "h11" do
@@ -135,24 +130,29 @@ class SshServerManager < Formula
     sha256 "fe01bd85eb3f8fb3dd0405defdeac9a5b4f6f0439edbb3149577f244a2e8245b"
   end
 
+  resource "maturin" do
+    url "https://files.pythonhosted.org/packages/bd/71/eb078174335ff30bde1be2ad54fb6256db4b160eb3efa81163fa30f8c814/maturin-1.16.0.tar.gz"
+    sha256 "13e69ca12542999d8c5467131de72a49bb76e4c284b9a45c5783df7c0fcb3a8a"
+  end
+
   resource "more-itertools" do
     url "https://files.pythonhosted.org/packages/52/b8/c63995bebbb9ac9c059350e0fb8c82c2420c85aeca7d34e40aecf3df9281/more_itertools-11.2.1.tar.gz"
     sha256 "cbf08fd0af284dc69718b9b76a8e6203df624d70209ea511e4219d350c856f63"
   end
 
   resource "opentelemetry-api" do
-    url "https://files.pythonhosted.org/packages/2e/02/6e0ae9cc61bd3169d401077b507b3ebc344745171e1051ab430be012dcd9/opentelemetry_api-1.45.1.tar.gz"
-    sha256 "aa38ed19bcc084ba42782a73255b3582283eced7ad6dddbd6695189e69adfb75"
+    url "https://files.pythonhosted.org/packages/19/14/cf3a6b6448849656e1e5f4e2101f3988dc6789724050096aba1bc5ccf592/opentelemetry_api-1.45.2.tar.gz"
+    sha256 "d7b0008e21e5fd61cbe7a7f34ca3b6905a78ab677d9bc395e299359c75cda6b4"
   end
 
   resource "platformdirs" do
-    url "https://files.pythonhosted.org/packages/58/e6/d0abbb256b44e6a05748c6942511ff67db8dbb068de0c35b24bf1b395b09/platformdirs-4.13.5.tar.gz"
-    sha256 "05831adf87d392760f4b5c3a0a95579ab5a10b18b9b9bd43680dcb47544788a0"
+    url "https://files.pythonhosted.org/packages/d7/9a/8475be631fb33ca1466915e70fd594c42a4e84b512db650eaa14f90fe75d/platformdirs-4.14.5.tar.gz"
+    sha256 "32e9921db7385aa8169bee4fe9501923e5715ba9fb7ea3b9c69b0d8e0639f7a1"
   end
 
   resource "pyasn1" do
-    url "https://files.pythonhosted.org/packages/a4/9a/23310166d960def5897e91fe20e5b724601b02a22e84ba1f94232c0b7f67/pyasn1-0.6.4.tar.gz"
-    sha256 "9c447d8431c947fe4c8febc4ed9e760bc29011a5b01e5c74b67025bd9fb8ce81"
+    url "https://files.pythonhosted.org/packages/88/7e/3c0da41061a2021cac7cd524fd57092adbe5b515e8bf9005702e366802e2/pyasn1-0.6.5.tar.gz"
+    sha256 "6b11616a6bcf3a40e635f082bb232fa57b5e0dd7f517bd7ddd69ec3794508a47"
   end
 
   resource "pyasn1-modules" do
@@ -166,13 +166,13 @@ class SshServerManager < Formula
   end
 
   resource "pydantic" do
-    url "https://files.pythonhosted.org/packages/7c/0b/8e10b2e693af8ec54346a14caf36221334775975a747c9ceaa3f8371d96d/pydantic-2.14.1.tar.gz"
-    sha256 "94f478203dd03404682a1ada216965651dd74b1d2d5ffd62e00e0837caab5c26"
+    url "https://files.pythonhosted.org/packages/b4/fc/1203d011145c98ddce3cd2f505bb54375ef8d43223053df6bfcf3c746f46/pydantic-2.14.3.tar.gz"
+    sha256 "1054f237f4d4733e5a30e1e2333bd33a2004ab9ab1510bd053a9a31bb48e232d"
   end
 
   resource "pydantic-core" do
-    url "https://files.pythonhosted.org/packages/a6/24/af4ec4be49fbc810f35b0bdcacc3d433b56bbfa469fd3bfd4ae116cd9bf1/pydantic_core-2.50.1.tar.gz"
-    sha256 "e50d7b94baac6c7d09927fa5ca5800a0c7ee5015c7fcff65beb3a1931b5a6e09"
+    url "https://files.pythonhosted.org/packages/9c/0f/34f9ce4ba701dd0b815033ef94d99b56f66200e578ee6052aa3ac26f064e/pydantic_core-2.50.4.tar.gz"
+    sha256 "aead3b74b68396bf0feab5d57e050b730ded7df55853c1e048a87e00aaf033c6"
   end
 
   resource "pyopenssl" do
@@ -181,8 +181,8 @@ class SshServerManager < Formula
   end
 
   resource "python-multipart" do
-    url "https://files.pythonhosted.org/packages/5b/42/55c32bb9b12693c092ad250a0e82edb5b31ddeda6eb772de5f308b3804ad/python_multipart-0.0.32.tar.gz"
-    sha256 "be54b7f3fa167bb83e4fcd936b887b708f4e57fe75911c02aebf53efaf8d938e"
+    url "https://files.pythonhosted.org/packages/9f/b7/15b905f6142a9a8a68f66900788da1a32e4d4254452783b37ad1eccb0506/python_multipart-0.0.33.tar.gz"
+    sha256 "b8112424a6abd162ec08d390565dd113ad699f2fe6fef3c987b8bbcbfe9e390d"
   end
 
   resource "pyyaml" do
@@ -191,8 +191,8 @@ class SshServerManager < Formula
   end
 
   resource "starlette" do
-    url "https://files.pythonhosted.org/packages/ad/eb/4e197bf26b023abafc5e9043ec8710d7de0fcb032d0969045236d72aa0b1/starlette-1.9.0.tar.gz"
-    sha256 "3d931de246ed870e35ce605974440816ef895e592f255d1396cfdf191d4c4318"
+    url "https://files.pythonhosted.org/packages/48/bb/3d8757f21e9a53d9035c9eb039a777047139a16bfdbedfc7a58241c3d914/starlette-1.10.0.tar.gz"
+    sha256 "b8399098d4c1e3522734f7235dc79b1fc967f96cf139c81e0fa30479e0685f9b"
   end
 
   resource "typing-extensions" do
@@ -201,8 +201,8 @@ class SshServerManager < Formula
   end
 
   resource "typing-inspection" do
-    url "https://files.pythonhosted.org/packages/a3/26/b09b8010994eccc3c09092e6b34058f36a460eea2d4c3e8b910c695975a0/typing_inspection-0.4.4.tar.gz"
-    sha256 "547274fa6b0a561ccf549cc9524b999a578e737d015d8709d021f9d0d13bea47"
+    url "https://files.pythonhosted.org/packages/ff/50/0195198eb1d75bab716bb0a813abea4cc394bfa17a92a189f021a34859af/typing_inspection-0.4.5.tar.gz"
+    sha256 "7f16c411e7930dc79596d42ab44672a3fe5f60eb34b781a1647e7872363120c7"
   end
 
   resource "uvicorn" do
@@ -220,6 +220,7 @@ class SshServerManager < Formula
   end
 
   test do
+    assert_match "hoploom #{version}", shell_output("#{bin}/hoploom --version")
     assert_match "serverctl #{version}", shell_output("#{bin}/serverctl --version")
     # The vault is the OS keychain, which a test sandbox does not have, so the
     # check stays on local metadata: create a host and read it back.
@@ -227,7 +228,15 @@ class SshServerManager < Formula
     ENV["SSM_RUNTIME_DIR"] = (testpath/"run").to_s
     ENV["SSM_MANAGED_SSH_CONFIG"] = (testpath/"managed.conf").to_s
     ENV["SSM_ORIGINAL_SSH_CONFIG"] = (testpath/"none").to_s
-    system bin/"serverctl", "server", "add", "web1", "--hostname", "web1.example.com", "--username", "deploy"
-    assert_match "web1.example.com", shell_output("#{bin}/serverctl server list --json")
+    system bin/"hoploom", "server", "add", "web1", "--hostname", "web1.example.com", "--username", "deploy"
+    assert_match "web1.example.com", shell_output("#{bin}/hoploom server list --json")
+    system libexec/"bin/python", "-I", "-c", <<~PYTHON
+      import sys
+      from ssh_server_manager import __version__, _native
+      from ssh_server_manager.execution import ExecutionSpec, get_executor
+      assert __version__ == _native.version == "#{version}"
+      result = get_executor("rust").start(ExecutionSpec((sys.executable, "-c", "print('brew-native')"))).wait(10)
+      assert result.reason == "exit" and result.returncode == 0 and result.stdout.strip() == b"brew-native"
+    PYTHON
   end
 end
